@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import Page from './Pages'
 export default class PageTest extends Component {
     state = {
-        current:3,
+        current:8,
         total:120,
         limit:13,
         panleNumber:6
