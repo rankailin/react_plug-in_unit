@@ -7,22 +7,31 @@ export default function Pages(props) {
     console.log(minPage,maxPage)
     const spanDom = [];
     for (let i = minPage; i < maxPage; i++ ){
-        spanDom.push(<span key={i} className={ props.current === i ? 'item active' : 'item'}>{i}</span>)
+        spanDom.push(<span key={i} onClick={()=>{toPage(i,props)}} className={ props.current === i ? 'item active' : 'item'}>{i}</span>)
     }
     
     return (
         <>
-            <span className={props.current === 1 ? 'item disable' : 'item'}>首页</span>
-            <span className={props.current === 1 ? 'item disable' : 'item'}>上一页</span>
+            <span onClick={()=>{toPage(1,props)}} className={props.current === 1 ? 'item disable' : 'item'}>首页</span>
+            <span onClick={()=>{toPage(props.current - 1 <= 1 ? 1 : props.current - 1,props)}} className={props.current === 1 ? 'item disable' : 'item'}>上一页</span>
             {/* 中间数字页码 */}
             {spanDom}
-            <span className={props.current === 1 ? 'item disable' : 'item'}>下一页</span>
-            <span className={props.current === 1 ? 'item disable' : 'item'}>尾页</span>
+            <span onClick={()=>{toPage(props.current + 1 >= pageNumber ? pageNumber : props.current + 1,props)}} className={props.current === pageNumber ? 'item disable' : 'item'}>下一页</span>
+            <span onClick={()=>{toPage(pageNumber,props)}} className={props.current === pageNumber ? 'item disable' : 'item'}>尾页</span>
             <span>{props.current}</span>
             /
             <span>{pageNumber}</span>
         </>
     )
+}
+
+/**
+ * 跳转至某一页
+ * @param {*} target 跳转到的页码 
+ */
+function toPage (target,props) {
+    if(props.current === target) return
+    props.onChangePage && props.onChangePage(target);
 }
 /**
  * H获取最大页码

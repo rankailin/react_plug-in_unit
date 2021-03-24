@@ -16,7 +16,7 @@ export default class PageTest extends Component {
     render() {
         return (
             <div>
-                <Page onChangePage={this.handelPage} {...this.state}/>
+                <Page onChangePage={this.handelPage} onChangePage={this.handelPage} {...this.state}/>
             </div>
         )
     }
